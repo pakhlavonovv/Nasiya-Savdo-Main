@@ -5,7 +5,7 @@ import {
     RouterProvider,
  } from "react-router-dom";
  import App from "../App";
-import { SignIn, SignUp, Product, Contract } from "../modules";
+import { SignIn, SignUp, Product, Contract, Exchange } from "../modules";
 import AdminLayout from '../modules/admin-layout/pages'
 
  const Index = () => {
@@ -17,6 +17,7 @@ import AdminLayout from '../modules/admin-layout/pages'
             <Route path="admin-layout" element={<AdminLayout/>}>
             <Route index element={<Product/>}/>
             <Route path="contract" element={<Contract/>}/>
+            <Route path="exchange" element={<Exchange/>}/>
             </Route>
           </Route> 
        )

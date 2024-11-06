@@ -18,7 +18,7 @@ const ProductDrawer = ({ open, handleCancel, update }: any) => {
                     color: update.color,
                     model: update.model,
                     made_in: update.made_in,
-                    date_of_creation: update.date_of_creation ? moment(update.date_of_creation) : null,
+                    date_of_creation: update.date_of_creation ? '22-01-2024' : null,
                 });
                 setImageUrl(update.image_url || null);
             } else {

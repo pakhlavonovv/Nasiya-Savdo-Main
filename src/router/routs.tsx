@@ -14,6 +14,11 @@ const admin:AdminType[] = [
         content: "Contract",
         path: "/admin-layout/contract",
         icon: <TagsOutlined style={{ fontSize: "16px" }} />,
+    },
+    {
+        content: "Exchange",
+        path: "/admin-layout/exchange",
+        icon: <TagsOutlined style={{ fontSize: "16px" }} />,
     }
 ];
 

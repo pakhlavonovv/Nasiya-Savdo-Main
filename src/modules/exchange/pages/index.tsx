@@ -60,29 +60,41 @@ const Contract = () => {
         index + 1 + (params.page - 1) * params.limit,
     },
     {
-      title: "Consumer address",
-      dataIndex: "consumer_address",
+      title: "Amount",
+      dataIndex: "amount",
     },
     {
-      title: "Consumer Name",
-      dataIndex: "consumer_name",
+      title: "Contract id",
+      dataIndex: "contract_id",
     },
     {
-      title: "Passport Serial",
-      dataIndex: "consumer_passport_serial",
+      title: "Created At",
+      dataIndex: "created_at",
     },
     {
-      title: "Phone number",
-      dataIndex: "phone_number",
+      title: "Delete at",
+      dataIndex: "deleted_at",
     },
     {
-      title: "Duration",
-      dataIndex: "duration",
+      title: "ID",
+      dataIndex: "id",
     },
     {
-      title: "Passport Image",
-      dataIndex: "passport_image",
+      title: "Price",
+      dataIndex: "price",
     },
+    {
+        title: "Product Id",
+        dataIndex: "product_id",
+      },
+      {
+        title: "Status",
+        dataIndex: "status",
+      },
+      {
+        title: "Updated At",
+        dataIndex: "updated_at",
+      },
     {
       title: "Action",
       key: "action",
@@ -100,7 +112,7 @@ const Contract = () => {
           <Popconfirm
             title="Are you sure to delete this consumer?"
             onConfirm={() => {
-              deleteMutate(record.id); // deleteContract o'rniga deleteMutate
+              deleteMutate(record.id); 
             }}
           >
 

@@ -25,7 +25,7 @@ const ProductModal = ({ open, handleClose, update }: ModalPropType) => {
 
   const handleSubmit = (values: CategoryDataType) => {
     if (update) {
-      alert('Wrong')
+      alert("Wrong")
     } else {
       createMutate(values, {
         onSuccess: () => {
