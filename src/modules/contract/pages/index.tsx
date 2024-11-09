@@ -12,7 +12,6 @@ import { ColumnsType } from "antd/es/table";
 import { ParamsType } from "../../../modules/types";
 import GlobalTable from "../../../components/table";
 import ProductModal from "./modal";
-import { useDeleteCategory } from "../hooks/mutation";
 
 const Contract = () => {
   const [params, setParams] = useState<ParamsType>({
@@ -26,7 +25,6 @@ const Contract = () => {
   const [updateData, setUpdateData] = useState<CategoryDataType | null>(null);
   const navigate = useNavigate();
   const { data, isLoading } = useGetCategory(params);
-  const { mutate: deleteMutate } = useDeleteCategory();
 
   const handleClose = () => {
     setOpen(false);
@@ -73,7 +71,7 @@ const Contract = () => {
     },
     {
       title: "Phone number",
-      dataIndex: "phone_number",
+      dataIndex: "consumer_phone_number",
     },
     {
       title: "Duration",
@@ -99,9 +97,6 @@ const Contract = () => {
           </Tooltip>
           <Popconfirm
             title="Are you sure to delete this consumer?"
-            onConfirm={() => {
-              deleteMutate(record.id); // deleteContract o'rniga deleteMutate
-            }}
           >
 
             <Tooltip title="Delete">

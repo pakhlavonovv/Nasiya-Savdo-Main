@@ -10,8 +10,12 @@ export const getCategory = async (params: ParamsType) => {
     return response?.data?.all_contracts    
 }
 // =======================  CREATE  ===========================
-export const createContract = async (data: CategoryDataType) => {
-    const response = await axiosInstance.post("/contract/create", data);
+export const createContract = async (data: FormData) => {
+    const response = await axiosInstance.post("/contract/create", data, {
+        headers: {
+            'Content-Type': 'multipart/form-data', 
+        }
+    });
     return response?.data;
 };
 

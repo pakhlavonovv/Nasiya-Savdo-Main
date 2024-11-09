@@ -1,12 +1,12 @@
 export interface CategoryDataType {
-    id: string | number;
-    name: string;
-    model: string,
-    made_in: string,
-    color:string,
-    date_of_creation: string | number 
-    image_url: string
-  }
+  id?: string | number;
+  consumer_address: string;
+  consumer_name: string;
+  consumer_passport_serial: string;
+  consumer_phone_number: string;
+  duration: number;
+  passport_image: string;
+}
 
 export interface StyleType {
     color?: string

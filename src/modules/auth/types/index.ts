@@ -12,3 +12,4 @@ export interface SignUp extends SignIn{
     phone_number: string;
     password: string
 }
+

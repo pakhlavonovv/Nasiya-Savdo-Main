@@ -1,14 +1,19 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, Upload } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CategoryDataType } from "../types";
 import { useCreateContract } from "../hooks/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 import { ModalPropType } from "../../types";
+import { uploadFile } from "../../product/service";
+
+
 
 const ProductModal = ({ open, handleClose, update }: ModalPropType) => {
   const [form] = useForm();
   const queryClient = useQueryClient();
+  const [image_url, setImageUrl] = useState<string | null>(null);
+
 
   const { mutate: createMutate } = useCreateContract();
   // const { mutate: updateMutate } = useCreateContract();
@@ -24,20 +29,39 @@ const ProductModal = ({ open, handleClose, update }: ModalPropType) => {
   }, [update, open, form]);
 
   const handleSubmit = (values: CategoryDataType) => {
-    if (update) {
-      alert('Wrong')
-    } else {
-      createMutate(values, {
+    const formData = new FormData();
+    formData.append("consumer_address", values.consumer_address);
+    formData.append("consumer_name", values.consumer_name);
+    formData.append("consumer_passport_serial", values.consumer_passport_serial);
+    formData.append("consumer_phone_number", values.consumer_phone_number);
+    formData.append("duration", values.duration.toString());
+    formData.append("passport_image", image_url || "");
+ 
+    createMutate(formData, {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["category"] });
-          handleClose();
+            queryClient.invalidateQueries({ queryKey: ["category"] });
+            handleClose();
         },
         onError: () => {
-          handleClose();
+            handleClose();
         },
-      });
+    });
+ };
+ 
+
+
+
+  const handleFileChange = async (info: any) => {
+    const selectedFile = info.file.originFileObj || info.file;
+    try {
+        const uploadedFileResponse = await uploadFile(selectedFile);
+        const uploadedImageUrl = uploadedFileResponse.made_url;
+        setImageUrl(uploadedImageUrl);
+        alert("File uploaded successfully!");
+    } catch (error) {
+        alert("File upload failed. Please try again.");
     }
-  };
+};
 
   return (
     <Modal
@@ -83,6 +107,19 @@ const ProductModal = ({ open, handleClose, update }: ModalPropType) => {
         >
           <Input placeholder="Enter duration" />
         </Form.Item>
+        <Form.Item
+                              name="passport_image"
+                              label="Image"
+                              rules={[{ required: true, message: 'Please upload an image' }]}
+                          >
+                              <Upload
+                                  onChange={handleFileChange}
+                                  beforeUpload={() => false}
+                                  showUploadList={false}
+                              >
+                                  <Button>Click to Upload</Button>
+                              </Upload>
+                          </Form.Item>
         <Form.Item>
           <Button className='bg-[#AD8354] text-white' htmlType="submit" block>
             {update ? "Update" : "Create"}
