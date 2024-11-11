@@ -3,6 +3,7 @@ import { Form, Input, Button } from "antd";
 import { NavLink, useNavigate, } from "react-router-dom";
 import { SignIn as SignInType} from "../../types";
 import { useSignInMutation } from "../../hooks/mutations"
+import { useEffect } from "react";
 
 
 const SignIn = () => {
@@ -12,7 +13,9 @@ const SignIn = () => {
     username: '',
     password: ''
   };
-
+  useEffect(()=> {
+    window.localStorage.removeItem("access_token")
+  })
 
   function handleSubmit(values: SignInType): void {
     mutate(values, {
